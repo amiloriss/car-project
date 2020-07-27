@@ -7,3 +7,5 @@ const person = new Schema({
   age: Number,
   gender: String,
 });
+
+module.exports = mongoose.model('Person', person);

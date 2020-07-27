@@ -7,3 +7,5 @@ const car = new Schema({
   color: String,
   personId: String,
 });
+
+module.exports = mongoose.model('Car', car);
