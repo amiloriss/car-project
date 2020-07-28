@@ -26,7 +26,7 @@ const Menu = ({ isOpen, isOpenHandler }) => {
             <Link to="/viewall">
               <li onClick={isOpenHandler}>view all person</li>
             </Link>
-            <Link to="/info">
+            <Link to="/">
               <li onClick={isOpenHandler}>information</li>
             </Link>
           </ul>

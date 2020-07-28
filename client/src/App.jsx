@@ -3,7 +3,7 @@ import './App.scss';
 import Menu from './components/menu/Menu';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Information from './components/information/Information';
 import AddCar from './components/addCar/AddCar';
 import AddPerson from './components/addPerson/AddPerson';
@@ -25,7 +25,7 @@ class App extends Component {
   render() {
     return (
       <ApolloProvider client={client}>
-        <div className="container">
+        <div className="container-app">
           <div className="menu-wrapper">
             <Menu
               isOpen={this.state.isOpen}
@@ -33,10 +33,12 @@ class App extends Component {
             />
           </div>
           <div className="app-wrapper">
-            <Route path="/addperson" component={AddPerson} />
-            <Route path="/addcar" component={AddCar} />
-            <Route path="/viewall" component={ViewAll} />
-            <Route path="/info" component={Information} />
+            <Switch>
+              <Route path="/addperson" component={AddPerson} />
+              <Route path="/addcar" component={AddCar} />
+              <Route path="/viewall" component={ViewAll} />
+              <Route path="/" component={Information} />
+            </Switch>
           </div>
         </div>
       </ApolloProvider>
