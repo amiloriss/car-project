@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './AddPerson.scss';
-import _, { add } from 'lodash';
+import _ from 'lodash';
 import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 
@@ -38,7 +38,7 @@ class AddPerson extends Component {
     e.preventDefault();
     if (
       this.state.name === '' ||
-      this.state.age == 0 ||
+      this.state.age === 0 ||
       (this.state.gender !== 'male' && this.state.gender !== 'female')
     ) {
     } else {
@@ -73,7 +73,7 @@ class AddPerson extends Component {
               onChange={(e) => {
                 this.setState({ age: +e.target.value });
               }}
-              type="text"
+              type="number"
               placeholder="enter the age..."
             />
           </div>
