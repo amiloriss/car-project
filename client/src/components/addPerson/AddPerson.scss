@@ -29,7 +29,17 @@
         border: none;
         padding: 5px;
         font-size: 18px;
-        color: #e9c46a;
+        color: #2a9d8f;
+        &:focus {
+          outline: none;
+        }
+      }
+      select {
+        font-size: 18px;
+        padding: 5px;
+        color: #2a9d8f;
+        cursor: pointer;
+        border: none;
         &:focus {
           outline: none;
         }

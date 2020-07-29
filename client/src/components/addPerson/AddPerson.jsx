@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './AddPerson.scss';
-import _ from 'lodash';
+import _, { add } from 'lodash';
 import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 
@@ -27,7 +27,6 @@ const addPersonMutation = gql`
 class AddPerson extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       name: '',
       age: 0,
@@ -37,13 +36,20 @@ class AddPerson extends Component {
 
   submitForm(e) {
     e.preventDefault();
-    this.props.addPersonMutation({
-      variables: {
-        name: this.state.name,
-        age: this.state.age,
-        gender: this.state.gender,
-      },
-    });
+    if (
+      this.state.name === '' ||
+      this.state.age == 0 ||
+      (this.state.gender !== 'male' && this.state.gender !== 'female')
+    ) {
+    } else {
+      this.props.addPersonMutation({
+        variables: {
+          name: this.state.name,
+          age: this.state.age,
+          gender: this.state.gender,
+        },
+      });
+    }
   }
 
   render() {
@@ -65,7 +71,7 @@ class AddPerson extends Component {
             <label htmlFor="">age:</label>
             <input
               onChange={(e) => {
-                this.setState({ age: e.target.value });
+                this.setState({ age: +e.target.value });
               }}
               type="text"
               placeholder="enter the age..."
@@ -73,13 +79,17 @@ class AddPerson extends Component {
           </div>
           <div className="input-wrapper">
             <label htmlFor="">gender:</label>
-            <input
+            <select
               onChange={(e) => {
                 this.setState({ gender: e.target.value });
               }}
-              type="text"
-              placeholder="enter the gender..."
-            />
+            >
+              <option selected disabled>
+                select gender
+              </option>
+              <option value="male">male</option>
+              <option value="female">female</option>
+            </select>
           </div>
           <button type="submit">add person</button>
         </form>
