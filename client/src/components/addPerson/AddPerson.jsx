@@ -1,29 +1,94 @@
 import React, { Component } from 'react';
 import './AddPerson.scss';
+import _ from 'lodash';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
+
+const getPersonQuery = gql`
+  {
+    persons {
+      name
+      age
+      gender
+    }
+  }
+`;
+
+const addPersonMutation = gql`
+  mutation AddPerson($name: String!, $age: Int!, $gender: String!) {
+    addPerson(name: $name, age: $age, gender: $gender) {
+      name
+      age
+      gender
+    }
+  }
+`;
 
 class AddPerson extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: '',
+      age: 0,
+      gender: '',
+    };
+  }
+
+  submitForm(e) {
+    e.preventDefault();
+    this.props.addPersonMutation({
+      variables: {
+        name: this.state.name,
+        age: this.state.age,
+        gender: this.state.gender,
+      },
+    });
+  }
+
   render() {
     return (
       <div className="add-person-wrapper">
         <h2 className="sub-title">Add New Person</h2>
-        <form className="add-form" onSubmit={(e) => e.preventDefault()}>
+        <form className="add-form" onSubmit={this.submitForm.bind(this)}>
           <div className="input-wrapper">
             <label htmlFor="">name:</label>
-            <input type="text" placeholder="enter the name..." />
+            <input
+              onChange={(e) => {
+                this.setState({ name: e.target.value });
+              }}
+              type="text"
+              placeholder="enter the name..."
+            />
           </div>
           <div className="input-wrapper">
             <label htmlFor="">age:</label>
-            <input type="text" placeholder="enter the age..." />
+            <input
+              onChange={(e) => {
+                this.setState({ age: e.target.value });
+              }}
+              type="text"
+              placeholder="enter the age..."
+            />
           </div>
           <div className="input-wrapper">
             <label htmlFor="">gender:</label>
-            <input type="text" placeholder="enter the gender..." />
+            <input
+              onChange={(e) => {
+                this.setState({ gender: e.target.value });
+              }}
+              type="text"
+              placeholder="enter the gender..."
+            />
           </div>
-          <button>add person</button>
+          <button type="submit">add person</button>
         </form>
       </div>
     );
   }
 }
 
-export default AddPerson;
+export default _.flowRight(
+  graphql(getPersonQuery, { name: 'getPersonQuery' }),
+  graphql(addPersonMutation, { name: 'addPersonMutation' })
+)(AddPerson);
