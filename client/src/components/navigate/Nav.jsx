@@ -14,9 +14,6 @@ const Nav = ({ isOpenHandler, isOpen }) => {
         <Link to="/addperson">
           <li onClick={isOpenHandler}>create person</li>
         </Link>
-        <Link to="/addcar">
-          <li onClick={isOpenHandler}>create car</li>
-        </Link>
         <Link to="/viewall">
           <li onClick={isOpenHandler}>view all person</li>
         </Link>

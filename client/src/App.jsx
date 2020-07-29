@@ -5,7 +5,6 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 import { Route, Switch } from 'react-router-dom';
 import Information from './components/information/Information';
-import AddCar from './components/addCar/AddCar';
 import AddPerson from './components/addPerson/AddPerson';
 import ViewAll from './components/viewAll/ViewAll';
 
@@ -35,7 +34,6 @@ class App extends Component {
           <div className="app-wrapper">
             <Switch>
               <Route path="/addperson" component={AddPerson} />
-              <Route path="/addcar" component={AddCar} />
               <Route path="/viewall" component={ViewAll} />
               <Route path="/" component={Information} />
             </Switch>

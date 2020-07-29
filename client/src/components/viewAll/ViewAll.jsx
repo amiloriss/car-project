@@ -14,7 +14,6 @@ const getPersonQuery = gql`
 `;
 
 const ViewAll = ({ data }) => {
-  console.log(data);
   function displayPersons() {
     if (data.loading) {
       return <div>Loading persons...</div>;
